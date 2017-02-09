@@ -30,3 +30,12 @@ app.get('/webhook/', function (req, res) {
 app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 })
+
+// Facebook Webhook
+app.get('/webhook', function (req, res) {  
+    if (req.query['hub.verify_token'] === 'bot_verify_token') {
+        res.send(req.query['hub.challenge']);
+    } else {
+        res.send('Invalid verify token');
+    }
+})
